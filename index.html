@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新兴市场 Agent集合</title>
+<style>
+  /* 配色完全复刻 https://agenthub.accio-ai.com/festival
+     色板来源：festival-BUYzYKNr.js 内联样式 */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --c-red: #C64A2E;
+    --c-red2: #D9542F;
+    --c-orange: #E0862F;
+    --c-orange2: #EE9A3C;
+    --c-maroon: #7A1B22;
+    --c-maroon2: #8A2028;
+    --c-btn: #1EAD6F;
+    --c-green-dark: #0B6B43;
+    --c-green-light: #E6F6EF;
+    --c-green-border: #B6E6D0;
+    --c-text: #111827;
+    --c-text2: #4B5563;
+    --c-text3: #9CA3AF;
+    --c-border: #EDEFF2;
+    --c-border2: #E1E4E8;
+    --c-bg-soft: #F7F9F8;
+    --shadow-card: 0 1px 2px rgba(16,24,40,0.05), 0 6px 16px rgba(16,24,40,0.05);
+    --shadow-hero: 0 1px 2px rgba(16,24,40,0.04), 0 12px 32px rgba(16,24,40,0.06);
+    --grad-text: linear-gradient(120deg, #2DBFAA, #34D08F);
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    background: #fff; color: var(--c-text); line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Hero（与原页顶部一致：浅色 + 青色径向光晕） ── */
+  .hero {
+    position: relative;
+    background:
+      radial-gradient(1200px 480px at 82% -8%, rgba(52,208,143,0.16), transparent 60%),
+      radial-gradient(900px 420px at 8% 4%, rgba(45,191,170,0.12), transparent 55%),
+      linear-gradient(180deg, #FBFDFC 0%, #F5FAF8 100%);
+    border-bottom: 1px solid var(--c-border);
+    padding: 70px 24px 78px;
+  }
+  .hero-content { max-width: 1160px; margin: 0 auto; text-align: center; }
+  .hero h1 {
+    font-size: 46px; line-height: 1.32; font-weight: 700; color: var(--c-text);
+    letter-spacing: -0.02em; margin-bottom: 18px;
+  }
+  .hero h1 .highlight {
+    background: var(--grad-text);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero-subtitle { font-size: 16px; color: var(--c-text2); margin-bottom: 32px; }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #fff; color: var(--c-red); font-size: 14px; font-weight: 700;
+    padding: 11px 22px; border-radius: 999px; text-decoration: none;
+    box-shadow: var(--shadow-hero); transition: all 0.2s;
+  }
+  .hero-cta:hover { transform: translateY(-1px); }
+
+  /* ── 三列布局 ── */
+  .columns {
+    max-width: 1160px; margin: 0 auto; padding: 76px 24px;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; align-items: start;
+  }
+
+  .column {
+    background: #fff; border: 1px solid var(--c-border); border-radius: 16px;
+    box-shadow: var(--shadow-card); overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+
+  /* 栏目头部：与原页三队完全相同的三段渐变 */
+  .col-header { padding: 18px 20px; color: #fff; position: relative; }
+  .col-header.col1 { background: linear-gradient(135deg, var(--c-red2), var(--c-red)); }
+  .col-header.col2 { background: linear-gradient(135deg, var(--c-orange2), var(--c-orange)); }
+  .col-header.col3 { background: linear-gradient(135deg, var(--c-maroon2), var(--c-maroon)); }
+
+  /* 右上角数字员工徽章（与原页一致） */
+  .col-badge {
+    position: absolute; top: 18px; right: 18px;
+    font-size: 11px; font-weight: 500;
+    background: rgba(255,255,255,0.9); color: var(--c-text);
+    padding: 3px 10px; border-radius: 999px; white-space: nowrap;
+  }
+  /* 顶部阶段标签（◷ 原样） */
+  .col-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 500;
+    background: rgba(255,255,255,0.22);
+    padding: 3px 11px; border-radius: 999px; margin-bottom: 12px;
+  }
+  .col-title { font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+  .col-desc { font-size: 13px; opacity: 0.94; line-height: 1.5; }
+
+  /* 栏目主体 */
+  .col-body { padding: 18px 20px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
+
+  /* Agent 卡片：白底 + 细边框 + 12px 圆角（与原页一致） */
+  .agent-card {
+    background: #fff; border: 1px solid var(--c-border); border-radius: 12px;
+    padding: 12px 14px; text-decoration: none; color: inherit;
+    transition: all 0.2s; display: flex; align-items: center; gap: 12px;
+  }
+  a.agent-card { cursor: pointer; }
+  a.agent-card:hover { box-shadow: var(--shadow-card); }
+  .card-main { flex: 1; min-width: 0; }
+  .card-head { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+  .card-tag {
+    font-size: 10px; font-weight: 500; color: #fff; background: var(--c-text);
+    padding: 1px 8px; border-radius: 6px; flex-shrink: 0;
+  }
+  .card-desc { font-size: 12px; color: var(--c-text2); line-height: 1.5; }
+
+  /* 按钮：绿色安装 / 灰色敬请期待（与原页一致） */
+  .btn {
+    flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 600; border-radius: 200px;
+    padding: 8px 16px; white-space: nowrap; border: none; cursor: pointer;
+    text-decoration: none; transition: all 0.15s;
+  }
+  .btn-green { background: var(--c-btn); color: #fff; }
+  .btn-green:hover { opacity: 0.92; }
+  .btn-grey {
+    background: var(--c-bg-soft); color: var(--c-text3);
+    border: 1px solid var(--c-border2); font-weight: 500; cursor: default;
+  }
+
+  /* 你可能还需要（浅绿底 + 绿色虚线框，与原页一致） */
+  .expand-box {
+    background: var(--c-green-light); border: 1px dashed var(--c-green-border);
+    border-radius: 12px; padding: 12px 14px;
+  }
+  .expand-toggle {
+    font-size: 12px; font-weight: 600; color: var(--c-green-dark);
+    background: none; border: none; cursor: pointer; padding: 0;
+    display: flex; align-items: center; gap: 6px; margin-bottom: 9px;
+  }
+  .expand-content { display: none; }
+  .expand-content.open { display: block; }
+  .expand-item {
+    display: flex; align-items: center; gap: 10px; font-size: 13px;
+    padding: 8px 0; border-bottom: 1px solid rgba(0,153,102,0.12);
+  }
+  .expand-item:last-of-type { border-bottom: none; }
+  .expand-item .ei-main { flex: 1; min-width: 0; }
+  .expand-item .ei-name { font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 6px; }
+  .expand-item .ei-desc { display: block; font-size: 11px; color: var(--c-text2); margin-top: 1px; }
+  .expand-item .btn { font-size: 12px; padding: 6px 14px; }
+  .expand-hint {
+    font-size: 11px; color: var(--c-green-dark); margin-top: 9px; line-height: 1.5;
+  }
+
+  /* ── 优秀上传 · 新兴市场精选（与原页一致） ── */
+  .curated-wrap { background: #fff; padding: 76px 0; }
+  .curated-inner { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+  .curated-header { text-align: center; max-width: 660px; margin: 0 auto 44px; }
+  .curated-header h2 { font-size: 32px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 12px; }
+  .curated-header p { font-size: 16px; color: var(--c-text2); }
+  .curated-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+  }
+  .cc-card {
+    background: #fff; border: 1px solid var(--c-border); border-radius: 16px;
+    padding: 22px; box-shadow: var(--shadow-card); transition: all 0.2s;
+    text-decoration: none; color: inherit;
+    display: flex; flex-direction: column;
+  }
+  .cc-card:hover { transform: translateY(-3px); }
+  .cc-head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .cc-name { font-size: 17px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .cc-name .type-badge {
+    flex-shrink: 0; font-size: 11px; font-weight: 500; color: var(--c-green-dark);
+    background: var(--c-green-light); padding: 1px 8px; border-radius: 6px;
+  }
+  .cc-meta { font-size: 12px; color: var(--c-text3); margin-bottom: 12px; }
+  .cc-meta .rating { color: var(--c-orange); font-weight: 600; }
+  .cc-desc {
+    font-size: 13px; color: var(--c-text2); line-height: 1.55; margin-bottom: 16px; flex: 1;
+    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .cc-foot { display: flex; align-items: center; justify-content: space-between; }
+  .cc-dls { font-size: 13px; color: var(--c-text2); }
+  .cc-dls b { color: var(--c-text); font-weight: 600; }
+  .cc-btn {
+    flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center;
+    background: var(--c-btn); color: #fff; font-size: 13px; font-weight: 600;
+    border-radius: 200px; padding: 9px 22px; white-space: nowrap; border: none;
+    cursor: pointer; text-decoration: none; transition: all 0.15s;
+  }
+  .cc-btn:hover { opacity: 0.92; }
+
+  .curated-placeholder {
+    min-height: 180px; background: var(--c-bg-soft);
+    border: 1px dashed var(--c-border2); border-radius: 16px; padding: 22px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+  }
+  .curated-placeholder .ph-title { font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+  .curated-placeholder .ph-desc { font-size: 13px; color: var(--c-text2); line-height: 1.55; }
+  .curated-placeholder .ph-status { font-size: 13px; color: var(--c-text3); margin-top: 14px; }
+
+  /* 底部去广场按钮（与原页一致） */
+  .bottom-cta { text-align: center; margin-top: 36px; }
+  .bottom-cta a {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-size: 15px; font-weight: 500; border-radius: 999px; padding: 13px 26px;
+    cursor: pointer; background: #fff; color: var(--c-text);
+    border: 1px solid var(--c-border2); text-decoration: none; transition: all 0.2s;
+  }
+  .bottom-cta a:hover { border-color: #009966; color: var(--c-green-dark); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .columns { grid-template-columns: 1fr; }
+    .curated-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 30px; }
+    .hero { padding: 48px 18px 56px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="hero">
+  <div class="hero-content">
+    <h1>新兴市场 <span class="highlight">Agent集合</span></h1>
+    <p class="hero-subtitle">AI 数字员工矩阵，为新兴市场出海商家提供全链路智能陪跑</p>
+    <a href="https://agenthub.accio-ai.com/search" class="hero-cta">探索全部 Agent →</a>
+  </div>
+</header>
+
+<!-- ═══════════ THREE-COLUMN LAYOUT ═══════════ -->
+<div class="columns">
+
+  <!-- ── Column 1: 新兴市场启航（红，同原"备战小队"） ── -->
+  <div class="column">
+    <div class="col-header col1">
+      <span class="col-badge">2 名数字员工</span>
+      <span class="col-tag">◷ 开店准备阶段</span>
+      <div class="col-title">新兴市场启航</div>
+      <div class="col-desc">从零起步，帮商家完成店铺搭建、装修上线和基础运营配置，以最佳状态进入新兴市场。</div>
+    </div>
+    <div class="col-body">
+      <!-- 新兴市场无忧起航 -->
+      <div class="agent-card">
+        <div class="card-main">
+          <div class="card-head">新兴市场无忧起航 <span class="card-tag">Agent</span></div>
+          <div class="card-desc">新兴市场全方位的AI Agent陪跑服务</div>
+        </div>
+        <span class="btn btn-grey">敬请期待</span>
+      </div>
+
+      <!-- 新兴市场店铺装修 -->
+      <div class="agent-card">
+        <div class="card-main">
+          <div class="card-head">新兴市场店铺装修 <span class="card-tag">Agent</span></div>
+          <div class="card-desc">针对东南亚、中东、拉美等新兴市场买家的审美与浏览习惯，提供本地化店铺视觉方案。</div>
+        </div>
+        <span class="btn btn-grey">敬请期待</span>
+      </div>
+
+      <!-- 你可能还需要... -->
+      <div class="expand-box">
+        <button class="expand-toggle" onclick="toggleExpand(this)">✚ 你可能还需要...</button>
+        <div class="expand-content">
+          <div class="expand-item">
+            <div class="ei-main">
+              <div class="ei-name">行业全景分析专家 <span class="card-tag">Agent</span></div>
+              <span class="ei-desc">进入新兴市场前摸清行业趋势与竞争格局，明确切入方向。</span>
+            </div>
+            <span class="btn btn-green">安装该Agent</span>
+          </div>
+          <div class="expand-item">
+            <div class="ei-main">
+              <div class="ei-name">优爆品打造助手 <span class="card-tag">Agent</span></div>
+              <span class="ei-desc">盘活商品资产，面向新兴市场买家偏好孵化潜力爆品。</span>
+            </div>
+            <span class="btn btn-green">安装该Agent</span>
+          </div>
+        </div>
+        <p class="expand-hint">安装后记得把这两个 Agent 和新兴市场无忧起航一起组建智能体团队。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Column 2: 新兴市场运营（橙，同原"流量冲刺小队"） ── -->
+  <div class="column">
+    <div class="col-header col2">
+      <span class="col-badge">2 名数字员工</span>
+      <span class="col-tag">◷ 日常运营阶段</span>
+      <div class="col-title">新兴市场运营</div>
+      <div class="col-desc">日常运营提效，帮商家精准选品、智能发品，在新兴市场持续放大生意增量。</div>
+    </div>
+    <div class="col-body">
+      <!-- 新兴市场优爆品打造助手 -->
+      <div class="agent-card">
+        <div class="card-main">
+          <div class="card-head">新兴市场优爆品打造助手 <span class="card-tag">Agent</span></div>
+          <div class="card-desc">专注于新兴市场的优爆品打造</div>
+        </div>
+        <span class="btn btn-grey">敬请期待</span>
+      </div>
+
+      <!-- 智能发品 -->
+      <div class="agent-card">
+        <div class="card-main">
+          <div class="card-head">智能发品 <span class="card-tag">Agent</span></div>
+          <div class="card-desc">一键智能生成适配新兴市场多语言、多币种、多物流方案的优质商品详情。</div>
+        </div>
+        <span class="btn btn-grey">敬请期待</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Column 3: 新兴市场知识库（酒红，同原"团战PK小队"） ── -->
+  <div class="column">
+    <div class="col-header col3">
+      <span class="col-badge">1 名数字员工</span>
+      <span class="col-tag">◷ 持续赋能阶段</span>
+      <div class="col-title">新兴市场知识库</div>
+      <div class="col-desc">深耕新兴市场洞察，从品类趋势、消费者画像到落地策略，一站式智能决策支持。</div>
+    </div>
+    <div class="col-body">
+      <!-- 新兴市场行业脉动洞察官 -->
+      <div class="agent-card">
+        <div class="card-main">
+          <div class="card-head">新兴市场行业脉动洞察官 <span class="card-tag">Agent</span></div>
+          <div class="card-desc">深耕新兴市场，一站式打通品类洞察、消费者画像与落地策略。</div>
+        </div>
+        <span class="btn btn-grey">敬请期待</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════ CURATED: 优秀上传 · 新兴市场精选 ═══════════ -->
+<div class="curated-wrap">
+  <div class="curated-inner">
+    <div class="curated-header">
+      <h2>优秀上传 · 新兴市场精选</h2>
+      <p>一键复用头部商家与资深运营的顶尖经验，在新兴市场少走弯路、快速起量。</p>
+    </div>
+    <div class="curated-grid">
+      <a class="cc-card" href="https://agenthub.accio-ai.com/space/global/%E4%BC%98%E4%B9%B0%E6%8A%A2%E6%B5%81%E5%AE%98" target="_blank">
+        <div class="cc-head">
+          <div class="cc-name">【金品】优买抢流官 <span class="type-badge">Agent</span></div>
+        </div>
+        <div class="cc-meta">by 浙商AI研习社 · <span class="rating">5.0 分</span></div>
+        <div class="cc-desc">老板的AI流量参谋。13项专业技能，覆盖付费投放、自然流量、AI推荐三路抢流。4维流量矩阵诊断、10大关键因子分析，24国优质人群精准溢价，新兴市场流量破局利器。</div>
+        <div class="cc-foot">
+          <span class="cc-dls"><b>45</b> 下载</span>
+          <a class="cc-btn" href="https://agenthub.accio-ai.com/space/global/%E4%BC%98%E4%B9%B0%E6%8A%A2%E6%B5%81%E5%AE%98" target="_blank">安装</a>
+        </div>
+      </a>
+
+      <a class="cc-card" href="https://agenthub.accio-ai.com/space/global/%E4%BC%98%E4%B9%B0%E6%88%90%E4%BA%A4%E5%AE%98" target="_blank">
+        <div class="cc-head">
+          <div class="cc-name">【金品】优买成交官-OKKI进阶版 <span class="type-badge">Agent</span></div>
+        </div>
+        <div class="cc-meta">by 浙商AI研习社 · <span class="rating">5.0 分</span></div>
+        <div class="cc-desc">覆盖「询盘→报价→信保→复购」成交全链路。内置询盘分级、信保闭环追踪、销售漏斗诊断、买家背调、客户RFM分层与复购预警，新兴市场询盘转化利器。</div>
+        <div class="cc-foot">
+          <span class="cc-dls"><b>40</b> 下载</span>
+          <a class="cc-btn" href="https://agenthub.accio-ai.com/space/global/%E4%BC%98%E4%B9%B0%E6%88%90%E4%BA%A4%E5%AE%98" target="_blank">安装</a>
+        </div>
+      </a>
+
+      <a class="cc-card" href="https://agenthub.accio-ai.com/space/global/%E5%AE%A2%E6%88%B7%E8%83%8C%E8%B0%83" target="_blank">
+        <div class="cc-head">
+          <div class="cc-name">客户背调 <span class="type-badge">Agent</span></div>
+        </div>
+        <div class="cc-meta">by Agent Hub · <span class="rating">4.8 分</span></div>
+        <div class="cc-desc">商业情报猎手，专精客户深度背调。多源还原客户真实画像，精准判断客户价值与采购意愿，输出可落地的跟进策略与成交话术，助力新兴市场买家甄别。</div>
+        <div class="cc-foot">
+          <span class="cc-dls"><b>128</b> 下载</span>
+          <a class="cc-btn" href="https://agenthub.accio-ai.com/space/global/%E5%AE%A2%E6%88%B7%E8%83%8C%E8%B0%83" target="_blank">安装</a>
+        </div>
+      </a>
+
+      <a class="cc-card" href="https://agenthub.accio-ai.com/space/global/%E8%A1%8C%E4%B8%9A%E5%85%A8%E6%99%AF%E5%88%86%E6%9E%90%E4%B8%93%E5%AE%B6" target="_blank">
+        <div class="cc-head">
+          <div class="cc-name">行业全景分析专家 <span class="type-badge">Agent</span></div>
+        </div>
+        <div class="cc-meta">by Agent Hub · <span class="rating">4.6 分</span></div>
+        <div class="cc-desc">深度行业分析智能体，覆盖市场规模、增长趋势、竞争格局、价格带分布等维度。进入新兴市场前，用数据看清赛道机会与风险。</div>
+        <div class="cc-foot">
+          <span class="cc-dls"><b>96</b> 下载</span>
+          <a class="cc-btn" href="https://agenthub.accio-ai.com/space/global/%E8%A1%8C%E4%B8%9A%E5%85%A8%E6%99%AF%E5%88%86%E6%9E%90%E4%B8%93%E5%AE%B6" target="_blank">安装</a>
+        </div>
+      </a>
+
+      <a class="cc-card" href="https://agenthub.accio-ai.com/space/global/%E5%A4%9A%E8%AF%AD%E8%A8%80%E5%95%86%E8%AF%A6%E4%BC%98%E5%8C%96" target="_blank">
+        <div class="cc-head">
+          <div class="cc-name">多语言商详优化助手 <span class="type-badge">Agent</span></div>
+        </div>
+        <div class="cc-meta">by Agent Hub · <span class="rating">4.5 分</span></div>
+        <div class="cc-desc">一键将商品详情翻译并本地化至东南亚、中东、拉美等目标市场语言，自动适配当地搜索习惯与文化偏好，突破新兴市场语言壁垒。</div>
+        <div class="cc-foot">
+          <span class="cc-dls"><b>73</b> 下载</span>
+          <a class="cc-btn" href="https://agenthub.accio-ai.com/space/global/%E5%A4%9A%E8%AF%AD%E8%A8%80%E5%95%86%E8%AF%A6%E4%BC%98%E5%8C%96" target="_blank">安装</a>
+        </div>
+      </a>
+
+      <div class="curated-placeholder">
+        <div class="ph-title">更多新兴市场精选</div>
+        <div class="ph-desc">头部商家与资深运营的新兴市场打法陆续上架，敬请期待。</div>
+        <div class="ph-status">敬请期待</div>
+      </div>
+    </div>
+
+    <div class="bottom-cta">
+      <a href="https://agenthub.accio-ai.com/search">去广场发现更多能力 →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleExpand(btn) {
+    const content = btn.nextElementSibling;
+    const isOpen = content.classList.contains('open');
+    content.classList.toggle('open');
+    btn.textContent = isOpen ? '✚ 你可能还需要...' : '✖ 收起';
+  }
+</script>
+</body>
+</html>
