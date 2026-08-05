@@ -170,10 +170,10 @@
   .cc-card {
     background: #fff; border: 1px solid var(--c-border); border-radius: 16px;
     padding: 22px; box-shadow: var(--shadow-card); transition: all 0.2s;
-    text-decoration: none; color: inherit;
+    color: inherit; cursor: pointer;
     display: flex; flex-direction: column;
   }
-  .cc-card:hover { transform: translateY(-3px); }
+  .cc-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-card), 0 12px 24px rgba(16,24,40,0.08); }
   .cc-head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
   .cc-name { font-size: 17px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
   .cc-name .type-badge {
@@ -186,9 +186,7 @@
     font-size: 13px; color: var(--c-text2); line-height: 1.55; margin-bottom: 16px; flex: 1;
     display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
   }
-  .cc-foot { display: flex; align-items: center; justify-content: space-between; }
-  .cc-dls { font-size: 13px; color: var(--c-text2); }
-  .cc-dls b { color: var(--c-text); font-weight: 600; }
+  .cc-foot { display: flex; align-items: center; justify-content: flex-end; }
   .cc-btn {
     flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center;
     background: var(--c-btn); color: #fff; font-size: 13px; font-weight: 600;
@@ -258,13 +256,13 @@
       </div>
 
       <!-- 旺铺装修 -->
-      <div class="agent-card">
+      <a class="agent-card" href="https://agenthub.accio-ai.com/space/global/%E6%97%BA%E9%93%BA%E8%A3%85%E4%BF%AE" target="_blank">
         <div class="card-main">
           <div class="card-head">旺铺装修 <span class="card-tag">Agent</span></div>
           <div class="card-desc">负责旺铺金品模板部署、素材上传发布、优商卡片配置及金品标识核查，让店铺上线即专业。</div>
         </div>
-        <span class="btn btn-grey">敬请期待</span>
-      </div>
+        <span class="btn btn-green">安装该Agent</span>
+      </a>
 
       <!-- 你可能还需要... -->
       <div class="expand-box">
@@ -309,13 +307,13 @@
       </div>
 
       <!-- 客户背调 -->
-      <div class="agent-card">
+      <a class="agent-card" href="https://agenthub.accio-ai.com/space/global/%E5%AE%A2%E6%88%B7%E8%83%8C%E8%B0%83" target="_blank">
         <div class="card-main">
           <div class="card-head">客户背调 <span class="card-tag">Agent</span></div>
           <div class="card-desc">商业情报猎手，专精客户深度背调。通过多源信息还原客户真实画像，精准判断客户价值与采购意愿，输出可落地的跟进策略与成交话术。</div>
         </div>
-        <span class="btn btn-grey">敬请期待</span>
-      </div>
+        <span class="btn btn-green">安装该Agent</span>
+      </a>
     </div>
   </div>
 
@@ -329,13 +327,13 @@
     </div>
     <div class="col-body">
       <!-- 新兴市场行业脉动洞察官 -->
-      <div class="agent-card">
+      <a class="agent-card" href="https://agenthub.accio-ai.com/space/global/%E5%A4%A7%E4%BF%83%E6%8C%87%E6%8C%A5%E5%AE%98" target="_blank">
         <div class="card-main">
           <div class="card-head">新兴市场行业脉动洞察官 <span class="card-tag">Agent</span></div>
           <div class="card-desc">深耕新兴市场，一站式打通品类洞察、消费者画像与落地策略。</div>
         </div>
-        <span class="btn btn-grey">敬请期待</span>
-      </div>
+        <span class="btn btn-green">安装该Agent</span>
+      </a>
     </div>
   </div>
 
@@ -349,89 +347,82 @@
       <p>一键复用头部商家与资深运营的顶尖经验，在新兴市场少走弯路、快速起量。</p>
     </div>
     <div class="curated-grid">
-      <a class="cc-card" href="https://agenthub.accio-ai.com/space/global/RFQ%E7%8B%99%E5%87%BB%E6%89%8B" target="_blank">
+      <div class="cc-card" onclick="window.open('https://agenthub.accio-ai.com/space/global/RFQ%E7%8B%99%E5%87%BB%E6%89%8B','_blank')">
         <div class="cc-head">
           <div class="cc-name">RFQ狙击手 <span class="type-badge">Agent</span></div>
         </div>
         <div class="cc-meta">by Agent Hub · 官方精选</div>
         <div class="cc-desc">专精 RFQ 报价，通过九段式报价结构提升中标率，快速锁定高意向买家订单，让每一次报价都更接近成交。</div>
         <div class="cc-foot">
-          <span class="cc-dls">官方出品</span>
           <a class="cc-btn" href="https://agenthub.accio-ai.com/space/global/RFQ%E7%8B%99%E5%87%BB%E6%89%8B" target="_blank">安装</a>
         </div>
-      </a>
+      </div>
 
-      <a class="cc-card" href="https://agenthub.accio-ai.com/space/global/%E8%B0%88%E5%88%A4%E8%AF%9D%E6%9C%AF%E5%B8%88" target="_blank">
+      <div class="cc-card" onclick="window.open('https://agenthub.accio-ai.com/space/global/%E8%B0%88%E5%88%A4%E8%AF%9D%E6%9C%AF%E5%B8%88','_blank')">
         <div class="cc-head">
           <div class="cc-name">谈判话术师 <span class="type-badge">Agent</span></div>
         </div>
         <div class="cc-meta">by Agent Hub · 官方精选</div>
         <div class="cc-desc">覆盖询盘、报价、议价、成交全流程的谈判话术专家，针对不同买家角色输出高效沟通策略，把价格博弈变成成交机会。</div>
         <div class="cc-foot">
-          <span class="cc-dls">官方出品</span>
           <a class="cc-btn" href="https://agenthub.accio-ai.com/space/global/%E8%B0%88%E5%88%A4%E8%AF%9D%E6%9C%AF%E5%B8%88" target="_blank">安装</a>
         </div>
-      </a>
+      </div>
 
-      <a class="cc-card" href="https://agenthub.accio-ai.com/space/global/%E5%9B%BD%E9%99%85%E7%AB%99%E8%A7%86%E8%A7%89%E5%A4%A7%E5%B8%88" target="_blank">
+      <div class="cc-card" onclick="window.open('https://agenthub.accio-ai.com/space/global/%E5%9B%BD%E9%99%85%E7%AB%99%E8%A7%86%E8%A7%89%E5%A4%A7%E5%B8%88','_blank')">
         <div class="cc-head">
           <div class="cc-name">国际站视觉大师 <span class="type-badge">Agent</span></div>
         </div>
         <div class="cc-meta">by Agent Hub · 官方精选</div>
         <div class="cc-desc">负责认证商品图片、商品视频、优商卡片文案、旺铺 Banner 等视觉素材的批量生产与优化，让店铺视觉统一专业。</div>
         <div class="cc-foot">
-          <span class="cc-dls">官方出品</span>
           <a class="cc-btn" href="https://agenthub.accio-ai.com/space/global/%E5%9B%BD%E9%99%85%E7%AB%99%E8%A7%86%E8%A7%89%E5%A4%A7%E5%B8%88" target="_blank">安装</a>
         </div>
-      </a>
+      </div>
 
-      <a class="cc-card" href="https://agenthub.accio-ai.com/space/global/%E4%B8%9A%E5%8A%A1AI%E6%88%90%E4%BA%A4%E6%8E%A8%E8%BF%9B%E5%AE%98" target="_blank">
+      <div class="cc-card" onclick="window.open('https://agenthub.accio-ai.com/space/global/%E4%B8%9A%E5%8A%A1AI%E6%88%90%E4%BA%A4%E6%8E%A8%E8%BF%9B%E5%AE%98','_blank')">
         <div class="cc-head">
           <div class="cc-name">业务AI成交推进官 <span class="type-badge">Agent</span></div>
         </div>
         <div class="cc-meta">by Agent Hub · 官方精选</div>
         <div class="cc-desc">贯穿询盘到成交的推进引擎，自动识别商机阶段、跟踪关键节点、提醒跟进动作，把潜在买家一步步推向成交。</div>
         <div class="cc-foot">
-          <span class="cc-dls">官方出品</span>
           <a class="cc-btn" href="https://agenthub.accio-ai.com/space/global/%E4%B8%9A%E5%8A%A1AI%E6%88%90%E4%BA%A4%E6%8E%A8%E8%BF%9B%E5%AE%98" target="_blank">安装</a>
         </div>
-      </a>
+      </div>
 
-      <a class="cc-card" href="https://agenthub.accio-ai.com/space/global/%E9%80%89%E5%93%81%E8%AE%BE%E8%AE%A1%E5%B8%88" target="_blank">
+      <div class="cc-card" onclick="window.open('https://agenthub.accio-ai.com/space/global/%E9%80%89%E5%93%81%E8%AE%BE%E8%AE%A1%E5%B8%88','_blank')">
         <div class="cc-head">
           <div class="cc-name">选品设计师 <span class="type-badge">Agent</span></div>
         </div>
         <div class="cc-meta">by Agent Hub · 官方精选</div>
         <div class="cc-desc">结合市场趋势与平台数据设计选品方案，从品类机会、价格带、差异化卖点到商品画像一站式输出，为新兴市场精准选品。</div>
         <div class="cc-foot">
-          <span class="cc-dls">官方出品</span>
           <a class="cc-btn" href="https://agenthub.accio-ai.com/space/global/%E9%80%89%E5%93%81%E8%AE%BE%E8%AE%A1%E5%B8%88" target="_blank">安装</a>
         </div>
-      </a>
+      </div>
 
-      <a class="cc-card" href="https://agenthub.accio-ai.com/space/global/%E5%B9%BF%E5%91%8A%E4%BC%98%E5%8C%96%E5%B8%88" target="_blank">
+      <div class="cc-card" onclick="window.open('https://agenthub.accio-ai.com/space/global/%E5%B9%BF%E5%91%8A%E4%BC%98%E5%8C%96%E5%B8%88','_blank')">
         <div class="cc-head">
           <div class="cc-name">广告优化师 <span class="type-badge">Agent</span></div>
         </div>
         <div class="cc-meta">by Agent Hub · 官方精选</div>
         <div class="cc-desc">效果广告预算分配、关键词抢量与投放诊断，动态调优广告计划，让每一分推广预算都花在新兴市场的刀刃上。</div>
         <div class="cc-foot">
-          <span class="cc-dls">官方出品</span>
           <a class="cc-btn" href="https://agenthub.accio-ai.com/space/global/%E5%B9%BF%E5%91%8A%E4%BC%98%E5%8C%96%E5%B8%88" target="_blank">安装</a>
         </div>
-      </a>
+      </div>
 
-      <a class="cc-card" href="https://agenthub.accio-ai.com/space/global/%E4%BF%A1%E4%BF%9D%E8%B7%9F%E5%8D%95%E5%8A%A9%E6%89%8B" target="_blank">
+      <div class="cc-card" onclick="window.open('https://agenthub.accio-ai.com/space/global/%E4%BF%A1%E4%BF%9D%E8%B7%9F%E5%8D%95%E5%8A%A9%E6%89%8B','_blank')">
         <div class="cc-head">
           <div class="cc-name">信保跟单助手 <span class="type-badge">Agent</span></div>
         </div>
         <div class="cc-meta">by Agent Hub · 官方精选</div>
         <div class="cc-desc">跟踪信保订单全流程，自动提醒发货、交期、买家确认等关键节点，降低履约风险，保障新兴市场交易资金安全。</div>
         <div class="cc-foot">
-          <span class="cc-dls">官方出品</span>
           <a class="cc-btn" href="https://agenthub.accio-ai.com/space/global/%E4%BF%A1%E4%BF%9D%E8%B7%9F%E5%8D%95%E5%8A%A9%E6%89%8B" target="_blank">安装</a>
         </div>
-      </a>
+      </div>
 
       <div class="curated-placeholder">
         <div class="ph-title">更多新兴市场精选</div>
